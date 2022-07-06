@@ -84,14 +84,91 @@ function uncensor(infected, discovered) {
 
 String.prototype.toJadenCase = function () {
     let arrayOfWords = this.split(" ")
-    let arrayWithLetterUp=[];
-    for (let i =0; i<arrayOfWords.length; i++){
-      let newWordArr = arrayOfWords[i].split("")
-        newWordArr[0]= newWordArr[0].toUpperCase()
+    let arrayWithLetterUp = [];
+    for (let i = 0; i < arrayOfWords.length; i++) {
+        let newWordArr = arrayOfWords[i].split("")
+        newWordArr[0] = newWordArr[0].toUpperCase()
         arrayWithLetterUp.push(newWordArr.join(""))
     }
     return (arrayWithLetterUp.join(" "))
 };
-//////
+////// Dot Calculator
+//
+// You have to write a calculator that receives strings for input. The dots will represent the number in the equation. There will be dots on one side, an operator, and dots again after the operator. The dots and the operator will be separated by one space.
+//
+// Here are the following valid operators :
+//
+// + Addition
+// - Subtraction
+// * Multiplication
+// // Integer Division
+
+function dotCalculator(equation) {
+    const allArray = equation.split(" ")
+    const firstNum = allArray[0].length
+    const secondNum = allArray[2].length
+    const operator = allArray[1]
+    let result;
+    switch (operator) {
+        case "+":
+            result = firstNum + secondNum
+            console.log(result)
+            break
+        case "-":
+            result = Math.abs(firstNum - secondNum)
+            console.log(result)
+            break
+        case "*":
+            result = firstNum * secondNum
+            console.log(result)
+            break
+        case "//":
+            result = Math.floor(firstNum / secondNum)
+            console.log(result);
+            break
+    }
+    let arr = [];
+    for (let i = 1; i <= result; i++) {
+        arr.push(".")
+    }
+    return arr.join("")
+}
+
+//dotCalculator("..... * ...............")
+
+
+//////Your colleagues have been looking over you shoulder. When you should have been doing your boring real job, you've been using the work computers to smash in endless hours of codewars.
+//
+// In a team meeting, a terrible, awful person declares to the group that you aren't working. You're in trouble. You quickly have to gauge the feeling in the room to decide whether or not you should gather your things and leave.
+//
+// Given an object (meet) containing team member names as keys, and their happiness rating out of 10 as the value, you need to assess the overall happiness rating of the group. If <= 5, return 'Get Out Now!'. Else return 'Nice Work Champ!'.
+//
+// Happiness rating will be total score / number of people in the room.
+//
+// Note that your boss is in the room (boss), their score is worth double it's face value (but they are still just one person!).
+
+function outed(meet, boss) {
+    let allNames = Object.keys(meet)
+    let allScores = Object.values(meet)
+    let bossNameOrder = allNames.findIndex(m=>m==boss) //1
+    let bossName = allNames.find(m=>m==boss) //julie
+    allScores.splice(bossNameOrder, 1)
+    let scoreBoss = meet[bossName]*2
+    let scoreMeet = allScores.reduce((a, b) => a + b)
+    let scoreAll = scoreMeet + scoreBoss
+    let average = scoreAll / (allNames.length)
+    if (average <=5) {
+        return ("Get Out Now!")
+    } else {
+        return ("Nice Work Champ!")
+    }
+}
+let objMeet = {
+    "nastya": 2,
+    "julie": 10,
+    "igor": 2
+}
+let boss = "julie"
+//outed(objMeet, boss)
 
 
